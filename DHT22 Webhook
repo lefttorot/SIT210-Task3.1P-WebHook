@@ -1,6 +1,7 @@
 #include <Adafruit_DHT.h>
 
 #define DHTPIN 2     
+
 #define DHTTYPE DHT22	
 
 DHT dht(DHTPIN, DHTTYPE);
@@ -10,18 +11,19 @@ void setup() {
 }
 
 void loop() {
-  // reads temperature
+    	// reads temperature
 	float t = dht.getTempCelcius();
-  
-	// checks for error values 
+	
+	// checks for error values
 	if (isnan(t)){
 		return;
 	}
 	
-  // Converts temperature to a string for publishing
+	// Converts temperature to a string for publishing
 	String temp = String(t);
 	
-  // publishes to particle events
+	// publishes to particle events
 	Particle.publish("temp", temp, PRIVATE);
 	delay(30000);
 }
+
